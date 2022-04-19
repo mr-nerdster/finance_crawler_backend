@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Expense Tracker",
+  "main": "server.js",
+  "engines": {
+    "node": "v16.14.2"
+  },
+  "scripts": {
+    "start": "node ./src/server.js",
+    "serve": "nodemon ./src/server.js"
+  },
+  "keywords": [
+    "MERN"
+  ],
+  "author": "Harshit Nigam",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^6.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
