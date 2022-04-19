@@ -16,6 +16,9 @@ app.use(express.json()); // to allow posting json data
 
 //routes
 app.use("/", usersRoute);
+app.get("/", (req, res) => {
+  res.json({ msg: "Welcome to the Expense Tracker!" });
+});
 
 //error handling
 app.use(notFound);
