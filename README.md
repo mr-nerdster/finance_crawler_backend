@@ -1,2 +1,2 @@
-# expense_tracker_backend
+# Finance Crawler Backend
 A Full Stack MERN project implementing DevOps
