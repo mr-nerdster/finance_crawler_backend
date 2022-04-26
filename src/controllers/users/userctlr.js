@@ -5,7 +5,7 @@ const User = require("../../models/User");
 //registration
 const registerUser = expressAsyncHandler(async (req, res) => {
   const { email, firstname, lastname, password } = req?.body;
-
+  // console.log(req?.body);
   const userExists = await User.findOne({ email }); // handle custom error handlers outside catch.
   if (userExists) throw new Error("User Exists");
   try {
@@ -14,6 +14,7 @@ const registerUser = expressAsyncHandler(async (req, res) => {
     // if (userExists) {
     //   res.json("User Exists");
     // } else {
+    // console.log(req.body);
     const user = await User.create({ email, firstname, lastname, password });
     res.status(200).json(user);
     console.log("User created");
@@ -39,8 +40,9 @@ const loginuser = expressAsyncHandler(async (req, res) => {
 
   //check password
   if (userFound && (await userFound.isPasswordMatch(password))) {
+    // console.log("working");
     res.json({
-      _id: userFound?._id,
+      id: userFound?._id,
       email: userFound?.email,
       firstname: userFound?.firstname,
       lastname: userFound?.lastname,

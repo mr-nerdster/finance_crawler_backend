@@ -27,7 +27,7 @@ const incomeSchema = mongoose.Schema(
     },
   },
   {
-    timestamp: true,
+    timestamps: true,
     // toJSON: {
     //   virtuals: true,
     // },

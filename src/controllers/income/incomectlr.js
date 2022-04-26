@@ -2,9 +2,15 @@ const income = require("../../models/income");
 const expressAsyncHandler = require("express-async-handler");
 
 const createIncome = expressAsyncHandler(async (req, res) => {
-  const { title, description, amount, user } = req?.body;
+  console.log(req?.body);
+  const { title, description, amount } = req?.body;
   try {
-    const inc = await income.create({ title, description, amount, user });
+    const inc = await income.create({
+      title,
+      description,
+      amount,
+      user: req?.user?._id,
+    });
     res.json(inc);
   } catch (error) {
     res.json(error);
@@ -29,13 +35,40 @@ const fetchAllIncomes = expressAsyncHandler(async (req, res) => {
 
 //fetch single income
 const fetchSingle = expressAsyncHandler(async (req, res) => {
-  const id = req.params.id;
+  const { id } = req?.params;
+  const resultsPerPage = 5;
+  const page = Number(req?.query.page);
+  console.log(page);
   try {
-    const inc = await income.findById(id);
-    // console.log("here");
+    const inc = await income
+      .find({ user: { _id: id } })
+      .limit(resultsPerPage)
+      .populate("user")
+      .skip(resultsPerPage * (page - 1));
+
+    const docs = await income.find({ user: { _id: id } });
+
+    const totalpages = Math.ceil(docs.length / resultsPerPage);
+    // console.log(totalpages);
+    // const exp1 = await exp.paginate(
+    //   {},
+    //   { limit: 7, page: page, populate: "user" }
+    // );
+    res.json({ inc: inc, totalPages: totalpages });
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+//fetch single income without pagination
+const fetchSingleWithoutPagination = expressAsyncHandler(async (req, res) => {
+  const { id } = req?.params;
+
+  try {
+    const inc = await income.find({ user: { _id: id } });
+
     res.json(inc);
   } catch (error) {
-    console.log(error.message);
     res.json(error);
   }
 });
@@ -71,6 +104,7 @@ module.exports = {
   createIncome,
   fetchAllIncomes,
   fetchSingle,
+  fetchSingleWithoutPagination,
   updateIncome,
   deleteIncome,
 };

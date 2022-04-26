@@ -30,6 +30,7 @@ app.use("/api/income", incomeRoute);
 
 //expense routes
 app.use("/api/expense", expRoute);
+//app.get("//", fwbheofhw);
 
 //error handling
 app.use(notFound);

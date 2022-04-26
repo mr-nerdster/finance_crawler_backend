@@ -14,7 +14,3 @@ const dbConnect = async () => {
 };
 
 module.exports = dbConnect;
-
-//user:harshit ; pass:gfVC1zO4RwhNmkua
-
-//mongodb+srv://harshit:<password>@expenses-tracker.ocnov.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
