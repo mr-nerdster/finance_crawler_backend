@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     strategy:
       matrix:
@@ -21,10 +21,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - uses: NightmareNight-em/finance_crawler_backend@main # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_KEY}}
+          heroku_app_name: "expense-tracker-vh1" #Must be unique in Heroku
+          heroku_email: "nightmarenightem@gmail.com"
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run build
+    - run: npm run build --if-present
+    - run: sudo pm2 restart backend
