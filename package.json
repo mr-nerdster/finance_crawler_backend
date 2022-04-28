@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node ./src/server.js",
-    "serve": "nodemon ./src/server.js"
+    "serve": "nodemon ./src/server.js",
+    "build": "node ./src/server.js"
   },
   "keywords": [
     "MERN"
