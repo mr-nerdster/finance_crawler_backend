@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: NightmareNight-em/finance_crawler_backend@main # This is the action
-        with:
+      with:
           heroku_api_key: ${{secrets.HEROKU_KEY}}
           heroku_app_name: "expense-tracker-vh1" #Must be unique in Heroku
           heroku_email: "nightmarenightem@gmail.com"
