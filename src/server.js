@@ -1,7 +1,7 @@
 const http = require("http");
 const app = require("./app");
 
-const PORT = 3080;
+const PORT = process.env.PORT || 3080;
 
 const server = http.createServer(app); // advantagious in future if want to implement any other communication protocols
 
