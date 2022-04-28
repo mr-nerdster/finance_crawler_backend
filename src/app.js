@@ -22,7 +22,7 @@ app.use(express.json()); // to allow posting json data
 //users routes
 app.use("/api/users", usersRoute);
 app.get("/", (req, res) => {
-  res.json({ msg: "Welcome to the Expense Tracker!" });
+  res.json({ msg: "Welcome to the Finance Crawler!" });
 });
 
 //income routes
