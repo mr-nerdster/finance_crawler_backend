@@ -16,8 +16,8 @@ const registerUser = expressAsyncHandler(async (req, res) => {
     // } else {
     // console.log(req.body);
     const user = await User.create({ email, firstname, lastname, password });
-    res.status(200).json(user);
-    console.log("User created");
+    res.status(200).json({ msg: "User Created" });
+    // console.log("User created");
   } catch (error) {
     res.json(error);
   }
