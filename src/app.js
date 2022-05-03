@@ -9,6 +9,8 @@ const incomeRoute = require("./routes/income/incomeRoute");
 const expRoute = require("./routes/expenses/expenseRoute");
 const app = express();
 
+app.use(cors());
+
 // ------------------ Sentry ----------------------
 const Sentry = require("@sentry/node");
 // or use es6 import statements
@@ -41,9 +43,9 @@ setTimeout(() => {
     transaction.finish();
   }
 }, 99);
-  // --------------------------------------------
+// --------------------------------------------
 
-app.use(cors());
+
 //env
 dotenv.config();
 
