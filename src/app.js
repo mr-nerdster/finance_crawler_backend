@@ -11,6 +11,15 @@ const app = express();
 
 app.use(cors());
 
+//env
+dotenv.config();
+
+//database connect
+db();
+
+//middleware
+app.use(express.json()); // to allow posting json data
+
 // ------------------ Sentry ----------------------
 const Sentry = require("@sentry/node");
 // or use es6 import statements
@@ -45,15 +54,6 @@ setTimeout(() => {
 }, 99);
 // --------------------------------------------
 
-
-//env
-dotenv.config();
-
-//database connect
-db();
-
-//middleware
-app.use(express.json()); // to allow posting json data
 
 //users routes
 app.use("/api/users", usersRoute);
