@@ -1,7 +1,4 @@
 const cors = require("cors");
-//setting up cors
-app.use(cors());
-
 // const Sentry = require("@sentry/node");
 // const Tracing = require("@sentry/tracing");
 const express = require("express");
@@ -43,6 +40,8 @@ app.use(express.json()); // to allow posting json data
 // app.use(Sentry.Handlers.tracingHandler());
 // -------------------------------------------------
 
+//setting up cors
+app.use(cors());
 
 
 //users routes
