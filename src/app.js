@@ -9,8 +9,6 @@ const incomeRoute = require("./routes/income/incomeRoute");
 const expRoute = require("./routes/expenses/expenseRoute");
 const app = express();
 
-app.use(cors());
-
 //env
 dotenv.config();
 
@@ -35,25 +33,21 @@ Sentry.init({
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
+  integrations: [
+      new Sentry.Integrations.Http({ tracing: true }),
+      new Tracing.Integrations.Express({
+          app,
+      }),
+  ],
   tracesSampleRate: 1.0,
 });
 
-const transaction = Sentry.startTransaction({
-  op: "test",
-  name: "My First Test Transaction",
-});
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
+// -------------------------------------------------
 
-setTimeout(() => {
-  try {
-    foo();
-  } catch (e) {
-    Sentry.captureException(e);
-  } finally {
-    transaction.finish();
-  }
-}, 99);
-// --------------------------------------------
-
+//setting up cors
+app.use(cors());
 
 //users routes
 app.use("/api/users", usersRoute);
