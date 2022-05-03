@@ -9,6 +9,40 @@ const incomeRoute = require("./routes/income/incomeRoute");
 const expRoute = require("./routes/expenses/expenseRoute");
 const app = express();
 
+// ------------------ Sentry ----------------------
+const Sentry = require("@sentry/node");
+// or use es6 import statements
+// import * as Sentry from '@sentry/node';
+
+const Tracing = require("@sentry/tracing");
+// or use es6 import statements
+// import * as Tracing from '@sentry/tracing';
+
+Sentry.init({
+  dsn: "https://b0e166ee11434bbe9f544e8a35576bc8@o1230295.ingest.sentry.io/6376883",
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
+
+const transaction = Sentry.startTransaction({
+  op: "test",
+  name: "My First Test Transaction",
+});
+
+setTimeout(() => {
+  try {
+    foo();
+  } catch (e) {
+    Sentry.captureException(e);
+  } finally {
+    transaction.finish();
+  }
+}, 99);
+  // --------------------------------------------
+
 app.use(cors());
 //env
 dotenv.config();
@@ -35,5 +69,7 @@ app.use("/api/expense", expRoute);
 //error handling
 app.use(notFound);
 app.use(errorHandler);
+
+
 
 module.exports = app;
