@@ -19,31 +19,31 @@ db();
 app.use(express.json()); // to allow posting json data
 
 // ------------------ Sentry ----------------------
-const Sentry = require("@sentry/node");
-// or use es6 import statements
-// import * as Sentry from '@sentry/node';
+// const Sentry = require("@sentry/node");
+// // or use es6 import statements
+// // import * as Sentry from '@sentry/node';
 
-const Tracing = require("@sentry/tracing");
-// or use es6 import statements
-// import * as Tracing from '@sentry/tracing';
+// const Tracing = require("@sentry/tracing");
+// // or use es6 import statements
+// // import * as Tracing from '@sentry/tracing';
 
-Sentry.init({
-  dsn: "https://b0e166ee11434bbe9f544e8a35576bc8@o1230295.ingest.sentry.io/6376883",
+// Sentry.init({
+//   dsn: "https://b0e166ee11434bbe9f544e8a35576bc8@o1230295.ingest.sentry.io/6376883",
 
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  integrations: [
-      new Sentry.Integrations.Http({ tracing: true }),
-      new Tracing.Integrations.Express({
-          app,
-      }),
-  ],
-  tracesSampleRate: 1.0,
-});
+//   // Set tracesSampleRate to 1.0 to capture 100%
+//   // of transactions for performance monitoring.
+//   // We recommend adjusting this value in production
+//   integrations: [
+//       new Sentry.Integrations.Http({ tracing: true }),
+//       new Tracing.Integrations.Express({
+//           app,
+//       }),
+//   ],
+//   tracesSampleRate: 1.0,
+// });
 
-app.use(Sentry.Handlers.requestHandler());
-app.use(Sentry.Handlers.tracingHandler());
+// app.use(Sentry.Handlers.requestHandler());
+// app.use(Sentry.Handlers.tracingHandler());
 // -------------------------------------------------
 
 //setting up cors
