@@ -21,20 +21,18 @@ app.use(express.json()); // to allow posting json data
 
 // ------------------ Sentry ----------------------
 
-// Sentry.init({
-//   dsn: "https://b0e166ee11434bbe9f544e8a35576bc8@o1230295.ingest.sentry.io/6376883",
+const Sentry = require("@sentry/node");
 
-//   // Set tracesSampleRate to 1.0 to capture 100%
-//   // of transactions for performance monitoring.
-//   // We recommend adjusting this value in production
-//   integrations: [
-//       new Sentry.Integrations.Http({ tracing: true }),
-//       new Tracing.Integrations.Express({
-//           app,
-//       }),
-//   ],
-//   tracesSampleRate: 1.0,
-// });
+// Importing @sentry/tracing patches the global hub for tracing to work.
+const SentryTracing = require("@sentry/tracing");
+
+Sentry.init({
+  dsn: "https://b0e166ee11434bbe9f544e8a35576bc8@o1230295.ingest.sentry.io/6376883",
+
+  // We recommend adjusting this value in production, or using tracesSampler
+  // for finer control
+  tracesSampleRate: 1.0,
+});
 
 // app.use(Sentry.Handlers.requestHandler());
 // app.use(Sentry.Handlers.tracingHandler());
