@@ -1,4 +1,5 @@
 const cors = require("cors");
+
 // const Sentry = require("@sentry/node");
 // const Tracing = require("@sentry/tracing");
 const express = require("express");
@@ -16,8 +17,13 @@ dotenv.config();
 //database connect
 db();
 
+
+
 //middleware
 app.use(express.json()); // to allow posting json data
+
+//setting up cors
+app.use(cors());
 
 // ------------------ Sentry ----------------------
 
@@ -45,8 +51,8 @@ app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 // -------------------------------------------------
 
-//setting up cors
-app.use(cors());
+// //setting up cors
+// app.use(cors());
 
 
 //users routes
