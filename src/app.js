@@ -34,8 +34,8 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-// app.use(Sentry.Handlers.requestHandler());
-// app.use(Sentry.Handlers.tracingHandler());
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
 // -------------------------------------------------
 
 //setting up cors
