@@ -39,7 +39,7 @@ Sentry.init({
   // for finer control
   integrations: [
     new Sentry.Integrations.Http({ tracing: true }),
-    new Tracing.Integrations.Express({
+    new SentryTracing.Integrations.Express({
     app,
     }),
     ],
