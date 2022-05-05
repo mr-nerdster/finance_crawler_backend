@@ -31,6 +31,13 @@ Sentry.init({
 
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
+  integrations: [
+    new Sentry.Integrations.Http({ tracing: true }),
+    new Tracing.Integrations.Express({
+    app,
+    }),
+    ],
+    
   tracesSampleRate: 1.0,
 });
 
