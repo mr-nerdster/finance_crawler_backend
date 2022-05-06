@@ -25,7 +25,7 @@ jobs:
       with:
           heroku_api_key: ${{secrets.HEROKU_KEY}}
           heroku_app_name: "finance-crawler-ah" #Must be unique in Heroku
-          heroku_email: "nightmarenightem@gmail.com"
+          heroku_email: "nigamharshit247@gmail.com"
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
